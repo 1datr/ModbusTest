@@ -206,19 +206,17 @@ namespace ModbusTest
             terminalform.Show();
         }
 
-        public void setRegValue(ushort addr, object value)
+        public void setRegUshortValue(ushort addr, ushort value)
         {           
-            if (value.GetType().Equals(TypeCode.UInt16))
-            {
+
                 con.SetRegValue(addr, (ushort)value);
                 this.PrintTerminal(String.Format("SET %MW[{0}]={1}", addr, (ushort)value));
-            }
+        }
             // Значение Float Пока не работает
-            if (value.GetType().Equals(TypeCode.Single))
-            {
+        public void setRegFloatValue(ushort addr, float value)
+        {
                 con.SetRegValue(addr, (ushort)value);
-                this.PrintTerminal(String.Format("SET %MW[{0}]={1}", addr, (ushort)value));
-            }
+                this.PrintTerminal(String.Format("SET %MW[{0}]={1}", addr, (ushort)value));            
         }
 
         private void установитьЗначениеРегистраToolStripMenuItem_Click(object sender, EventArgs e)
