@@ -200,6 +200,25 @@ namespace ModbusTest
             terminalform.Show();
         }
 
+        public void setRegValue(ushort addr, object value)
+        {           
+            if (value.GetType().Equals(TypeCode.Int16))
+            {
+                    con.SetRegValue(addr, (ushort)value); 
+            }
+
+            if (value.GetType().Equals(TypeCode.Single))
+            {
+                con.SetRegValue(addr, (ushort)value);
+            }
+        }
+
+        private void установитьЗначениеРегистраToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SetRegisterForm regform = new SetRegisterForm();
+            regform.Show();
+        }
+
         
     }
 }
