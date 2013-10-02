@@ -59,6 +59,7 @@
             this.button1.TabIndex = 1;
             this.button1.Text = "Установить";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // textBox1
             // 
@@ -66,6 +67,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(76, 20);
             this.textBox1.TabIndex = 2;
+            this.textBox1.Text = "0";
             // 
             // textBox2
             // 
@@ -129,6 +131,7 @@
             this.MinimizeBox = false;
             this.Name = "SetRegisterForm";
             this.Text = "Запись в регистр";
+            this.Load += new System.EventHandler(this.SetRegisterForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
