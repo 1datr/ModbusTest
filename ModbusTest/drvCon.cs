@@ -127,13 +127,12 @@ namespace ModbusTest
         public static ushort datetime_Addr = 31788;
         // ядрес ячейки с координатами
         private static int coordCellAdr = 15000, andCoordCellAdr = 41;
+        private Form1 Owner;
 
 
-
-        public drvCon()
+        public drvCon(Form1 owner = null)
         {
-
-        
+            Owner = owner;        
         }
 
         private string error_str;
@@ -142,23 +141,7 @@ namespace ModbusTest
         }
         private void setError(string str="")
         {
-            MessageBox.Show(str);
-           /* if (MainForm == null) return;
-            
-            if (MainForm.Name == "fSh1")
-            { this.MainForm.ErrorConnectSh1 = true; }
-            else if (MainForm.Name == "fSh2")
-            { this.MainForm.ErrorConnectSh2 = true; }
-            else if (MainForm.Name == "fSh3")
-            { this.MainForm.ErrorConnectSh3 = true; }
-            else if (MainForm.Name == "fSh4")
-            { this.MainForm.ErrorConnectSh4 = true; }
-            else if (MainForm.Name == "fSh5")
-            { this.MainForm.ErrorConnectSh5 = true; }
-            else if (MainForm.Name == "fLoadTrans")
-            { this.MainForm.ErrorConnectLoadTrans = true; }
-            else if (MainForm.Name == "fUnloadTrans")
-            { this.MainForm.ErrorConnectUnloadTrans = true; }*/
+            if (Owner != null) Owner.OnError(str);
         }
 
         private void resetError()
@@ -209,13 +192,12 @@ namespace ModbusTest
                 else
                 {
                     ret = false;
-                    this.error_str = "Connection error";
+                    setError("Connection error");
                 }
             }
             catch (Exception e)
             {
-                this.error_str = e.Message;
-                setError();
+                setError(e.Message);
             }
             finally
             {}

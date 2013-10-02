@@ -146,7 +146,13 @@ namespace ModbusTest
                 PrintTerminal("DINT Timer stop working");
             }
         }
-
+        // При ошибке
+        public void OnError(string ErrStr)
+        {
+            MessageBox.Show("Ошибка " + ErrStr);
+            PrintTerminal("Ошибка " + ErrStr);
+        }
+        
         private void timer1_Tick(object sender, EventArgs e)
         {
             WatchDINTValues();
@@ -202,20 +208,23 @@ namespace ModbusTest
 
         public void setRegValue(ushort addr, object value)
         {           
-            if (value.GetType().Equals(TypeCode.Int16))
+            if (value.GetType().Equals(TypeCode.UInt16))
             {
-                    con.SetRegValue(addr, (ushort)value); 
+                con.SetRegValue(addr, (ushort)value);
+                this.PrintTerminal(String.Format("SET %MW[{0}]={1}", addr, (ushort)value));
             }
-
+            // Значение Float Пока не работает
             if (value.GetType().Equals(TypeCode.Single))
             {
                 con.SetRegValue(addr, (ushort)value);
+                this.PrintTerminal(String.Format("SET %MW[{0}]={1}", addr, (ushort)value));
             }
         }
 
         private void установитьЗначениеРегистраToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetRegisterForm regform = new SetRegisterForm();
+            regform.OwnerForm = this;
             regform.Show();
         }
 

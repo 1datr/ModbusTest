@@ -16,7 +16,7 @@ namespace ModbusTest
         {
             InitializeComponent();
         }
-
+        // вывод сообщения в терминал
         public void printmess(string str)
         {
             string newstr =  "[" + System.DateTime.Now + "] " + str;
