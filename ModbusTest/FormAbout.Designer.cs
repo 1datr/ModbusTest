@@ -60,6 +60,7 @@
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label1);
             this.Name = "FormAbout";
+            this.ShowIcon = false;
             this.Text = "О программе";
             this.ResumeLayout(false);
             this.PerformLayout();

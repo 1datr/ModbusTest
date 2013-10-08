@@ -17,31 +17,30 @@ namespace ModbusTest
             InitializeComponent();
         }
         // вывод сообщения в терминал
-        public void printmess(string str)
+        public string ShowBuff(string str)
         {
-            string newstr =  "[" + System.DateTime.Now + "] " + str;
-
-            using (FileStream fs = new FileStream("ModbusTest.log", FileMode.Append))
-            {
-                using (StreamWriter sw = new StreamWriter(fs))
-                {
-                    sw.WriteLine(newstr);
-                }
-            }
-
-            this.textBox1.Text = this.textBox1.Text + newstr + "\r\n";
-            
+            this.textBox1.Text = str;            
             
             textBox1.SelectionStart = textBox1.Text.Length;
             textBox1.SelectionLength = 0;
 
             this.textBox1.ScrollToCaret();
 
-            
+            return textBox1.Text;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+
+        }
+
+        public void AnimTimer(bool close=false)
+        {
+            string buf = "|/-\\|/-\\";
+            if (close)
+            { 
+            
+            }
 
         }
     }

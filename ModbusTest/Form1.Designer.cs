@@ -29,12 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.главноеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.соединитьсяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.терминалToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.выходToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.разноеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.установитьЗначениеРегистраToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.TabControl = new System.Windows.Forms.TabControl();
@@ -64,8 +67,6 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
-            this.разноеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.установитьЗначениеРегистраToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -82,7 +83,7 @@
             // 
             this.statusStrip1.Location = new System.Drawing.Point(0, 273);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(378, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(344, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -94,7 +95,7 @@
             this.оПрограммеToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(378, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(344, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -111,23 +112,38 @@
             // соединитьсяToolStripMenuItem
             // 
             this.соединитьсяToolStripMenuItem.Name = "соединитьсяToolStripMenuItem";
-            this.соединитьсяToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.соединитьсяToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.соединитьсяToolStripMenuItem.Text = "Соединиться";
             this.соединитьсяToolStripMenuItem.Click += new System.EventHandler(this.соединитьсяToolStripMenuItem_Click);
             // 
             // терминалToolStripMenuItem
             // 
             this.терминалToolStripMenuItem.Name = "терминалToolStripMenuItem";
-            this.терминалToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.терминалToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.терминалToolStripMenuItem.Text = "Терминал";
             this.терминалToolStripMenuItem.Click += new System.EventHandler(this.терминалToolStripMenuItem_Click);
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
+            // 
+            // разноеToolStripMenuItem
+            // 
+            this.разноеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.установитьЗначениеРегистраToolStripMenuItem});
+            this.разноеToolStripMenuItem.Name = "разноеToolStripMenuItem";
+            this.разноеToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
+            this.разноеToolStripMenuItem.Text = "Разное";
+            // 
+            // установитьЗначениеРегистраToolStripMenuItem
+            // 
+            this.установитьЗначениеРегистраToolStripMenuItem.Name = "установитьЗначениеРегистраToolStripMenuItem";
+            this.установитьЗначениеРегистраToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
+            this.установитьЗначениеРегистраToolStripMenuItem.Text = "Установить значение регистра";
+            this.установитьЗначениеРегистраToolStripMenuItem.Click += new System.EventHandler(this.установитьЗначениеРегистраToolStripMenuItem_Click);
             // 
             // оПрограммеToolStripMenuItem
             // 
@@ -152,7 +168,7 @@
             this.TabControl.Location = new System.Drawing.Point(0, 24);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(378, 249);
+            this.TabControl.Size = new System.Drawing.Size(344, 249);
             this.TabControl.TabIndex = 2;
             this.TabControl.Visible = false;
             // 
@@ -164,7 +180,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(370, 223);
+            this.tabPage1.Size = new System.Drawing.Size(336, 223);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "DINT";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -209,7 +225,7 @@
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Location = new System.Drawing.Point(3, 64);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(364, 25);
+            this.panel1.Size = new System.Drawing.Size(330, 25);
             this.panel1.TabIndex = 3;
             // 
             // textBox2
@@ -250,7 +266,7 @@
             this.Column2});
             this.dataGridView1.Location = new System.Drawing.Point(3, 95);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(364, 125);
+            this.dataGridView1.Size = new System.Drawing.Size(330, 125);
             this.dataGridView1.TabIndex = 0;
             // 
             // Column1
@@ -397,29 +413,15 @@
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
-            // разноеToolStripMenuItem
-            // 
-            this.разноеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.установитьЗначениеРегистраToolStripMenuItem});
-            this.разноеToolStripMenuItem.Name = "разноеToolStripMenuItem";
-            this.разноеToolStripMenuItem.Size = new System.Drawing.Size(57, 20);
-            this.разноеToolStripMenuItem.Text = "Разное";
-            // 
-            // установитьЗначениеРегистраToolStripMenuItem
-            // 
-            this.установитьЗначениеРегистраToolStripMenuItem.Name = "установитьЗначениеРегистраToolStripMenuItem";
-            this.установитьЗначениеРегистраToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
-            this.установитьЗначениеРегистраToolStripMenuItem.Text = "Установить значение регистра";
-            this.установитьЗначениеРегистраToolStripMenuItem.Click += new System.EventHandler(this.установитьЗначениеРегистраToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(378, 295);
+            this.ClientSize = new System.Drawing.Size(344, 295);
             this.Controls.Add(this.TabControl);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Modbus Test";

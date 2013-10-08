@@ -42,8 +42,20 @@ namespace ModbusTest
 
         public void PrintTerminal(String str)
         {
-            if (terminalform == null) terminalform = new TerminalForm();
-            terminalform.printmess(str);
+            string newstr = "[" + System.DateTime.Now + "] " + str;
+
+            using (FileStream fs = new FileStream("ModbusTest.log", FileMode.Append))
+            {
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    sw.WriteLine(newstr);
+                }
+            }
+
+            this.TerminalString = this.TerminalString + newstr + "\r\n";
+
+            if (terminalform.Visible)
+                terminalform.ShowBuff(this.TerminalString);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -202,9 +214,12 @@ namespace ModbusTest
 
         private void терминалToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (terminalform == null) terminalform = new TerminalForm();
+            terminalform = new TerminalForm();
+            terminalform.Owner = this;
             terminalform.Show();
         }
+
+        private string TerminalString = "";
 
         public void setRegUshortValue(ushort addr, ushort value)
         {           

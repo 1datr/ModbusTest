@@ -49,6 +49,8 @@
             this.ClientSize = new System.Drawing.Size(478, 285);
             this.Controls.Add(this.textBox1);
             this.Name = "TerminalForm";
+            this.ShowIcon = false;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Терминал";
             this.ResumeLayout(false);
             this.PerformLayout();
