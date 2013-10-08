@@ -63,7 +63,7 @@ namespace ModbusTest
             WatchDINTValues();
         }
 
-
+        // просмотр в целых числах
         private void WatchDINTValues()
         {
             if (!groupDINTTimer.Enabled) groupDINTTimer.Enabled = true;
