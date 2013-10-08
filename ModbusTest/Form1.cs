@@ -42,6 +42,8 @@ namespace ModbusTest
 
         public void PrintTerminal(String str)
         {
+            if (this.TerminalStrings == null) this.TerminalStrings = new List<string>();
+
             string newstr = "[" + System.DateTime.Now + "] " + str;
 
             using (FileStream fs = new FileStream("ModbusTest.log", FileMode.Append))
@@ -52,14 +54,16 @@ namespace ModbusTest
                 }
             }
 
-            this.TerminalString = this.TerminalString + newstr + "\r\n";
+            this.TerminalStrings.Add(newstr);
 
             if (terminalform.Visible)
-                terminalform.ShowBuff(this.TerminalString);
+                terminalform.ShowBuff(this.TerminalStrings);
         }
-
+        
+        private bool INT_MODE_TIMER;
         private void button1_Click(object sender, EventArgs e)
         {
+            INT_MODE_TIMER = false;
             WatchDINTValues();
         }
 
@@ -68,16 +72,25 @@ namespace ModbusTest
         {
             // векторы с числами
             UshortList = new List<ushort>();
-            if (OldUshortList == null)
+            if (INT_MODE_TIMER)
+            {
+                if (OldUshortList == null)
+                    OldUshortList = new List<ushort>();
+            }
+            else
                 OldUshortList = new List<ushort>();
-            // получить числа из регистров
-            if (!groupDINTTimer.Enabled) groupDINTTimer.Enabled = true;
+            groupDINTTimer.Enabled = true;
+            timer1.Enabled = false;
+            // получить числа из регистров            
             dataGridView1.Rows.Clear();
             for (ushort regaddr = ushort.Parse(textBox1.Text); regaddr <= ushort.Parse(textBox2.Text); regaddr += 2)
             {
                 ushort regval = con.Reg(regaddr);
                 dataGridView1.Rows.Add(regaddr.ToString(), regval.ToString());
-                UshortList.Add(regval);                
+                UshortList.Add(regval);           
+                // анимация
+                if(this.terminalform.Visible)
+                    this.terminalform.AnimTimer();
             }
             // если есть изменения в показаниях
             if (!UshortList.SequenceEqual<ushort>(OldUshortList))
@@ -88,10 +101,12 @@ namespace ModbusTest
                     PrintTerminal(String.Format("%MW{0} = {1}", regaddr.ToString(), regval.ToString()));
                     regaddr += 2;
                 }
+                OldUshortList = UshortList;
             }
             
         }
 
+        private bool REAL_MODE_TIMER = false;
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             textBox2.Text = textBox1.Text;
@@ -112,7 +127,9 @@ namespace ModbusTest
 
         private void button2_Click(object sender, EventArgs e)
         {
+            REAL_MODE_TIMER = true;
             WatchRealValues();
+
         }
 
         private float _2words2float(ushort[] value)
@@ -144,14 +161,18 @@ namespace ModbusTest
             if (OldFloatList == null)
                 OldFloatList = new List<float>();
             // получить числа из регистров
-            groupRealTimer.Enabled = true;            
+            groupRealTimer.Enabled = true;
+            timer2.Enabled = false;
             for (ushort regaddr = ushort.Parse(this.tbRealAddr1.Text); regaddr <= ushort.Parse(this.tbRealAddr2.Text); regaddr+=4)
             {
                 ushort[] temp = new ushort[2];
                 temp[1] = con.Reg(regaddr);
                 temp[0] = con.Reg((ushort)(regaddr+2));
                 float val = _2words2float(temp);
-                FloatList.Add(val);                
+                FloatList.Add(val);           
+                // анимация
+                if(this.terminalform.Visible)
+                    this.terminalform.AnimTimer();
             }
 
             // если есть изменения в показаниях
@@ -204,10 +225,10 @@ namespace ModbusTest
         private List<ushort> UshortList;    // Список Ushort-ов
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (OldUshortList == null) OldUshortList = new List<ushort>();
-            UshortList = new List<ushort>();
+            timer1.Enabled = false;
+            INT_MODE_TIMER = true;
             WatchDINTValues();
-            OldUshortList = UshortList;
+            timer1.Enabled = true;
         }
 
         private void DINTTimerStep_TextChanged(object sender, EventArgs e)
@@ -221,7 +242,10 @@ namespace ModbusTest
 
         private void timer2_Tick(object sender, EventArgs e)
         {
+            timer2.Enabled = false;
+            REAL_MODE_TIMER = true;
             WatchRealValues();
+            timer2.Enabled = true;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -254,12 +278,13 @@ namespace ModbusTest
 
         private void терминалToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            terminalform = new TerminalForm();
+            terminalform = new TerminalForm();            
             terminalform.Owner = this;
             terminalform.Show();
+            terminalform.ShowBuff(this.TerminalStrings);
         }
 
-        private string TerminalString = "";
+        private List<string> TerminalStrings;
 
         public void setRegUshortValue(ushort addr, ushort value)
         {           
