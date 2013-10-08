@@ -66,13 +66,28 @@ namespace ModbusTest
         // просмотр в целых числах
         private void WatchDINTValues()
         {
+            // векторы с числами
+            UshortList = new List<ushort>();
+            if (OldUshortList == null)
+                OldUshortList = new List<ushort>();
+            // получить числа из регистров
             if (!groupDINTTimer.Enabled) groupDINTTimer.Enabled = true;
             dataGridView1.Rows.Clear();
             for (ushort regaddr = ushort.Parse(textBox1.Text); regaddr <= ushort.Parse(textBox2.Text); regaddr += 2)
             {
                 ushort regval = con.Reg(regaddr);
                 dataGridView1.Rows.Add(regaddr.ToString(), regval.ToString());
-                PrintTerminal(String.Format("%MW{0} = {1}", regaddr.ToString(), regval.ToString()));
+                UshortList.Add(regval);                
+            }
+            // если есть изменения в показаниях
+            if (!UshortList.SequenceEqual<ushort>(OldUshortList))
+            {
+                ushort regaddr = ushort.Parse(textBox1.Text);
+                foreach (ushort regval in UshortList)
+                {
+                    PrintTerminal(String.Format("%MW{0} = {1}", regaddr.ToString(), regval.ToString()));
+                    regaddr += 2;
+                }
             }
             
         }
@@ -119,30 +134,50 @@ namespace ModbusTest
 
         }
 
+        private List<float> OldFloatList;    // Старый список Ushort-ов
+        private List<float> FloatList;    // Список Ushort-ов
         // Просмотр в формате чисел с плавающей запятой
         private void WatchRealValues()
         {
-            groupRealTimer.Enabled = true;
-            dataGridView2.Rows.Clear();
+            // векторы с числами
+            FloatList = new List<float>();
+            if (OldFloatList == null)
+                OldFloatList = new List<float>();
+            // получить числа из регистров
+            groupRealTimer.Enabled = true;            
             for (ushort regaddr = ushort.Parse(this.tbRealAddr1.Text); regaddr <= ushort.Parse(this.tbRealAddr2.Text); regaddr+=4)
             {
                 ushort[] temp = new ushort[2];
                 temp[1] = con.Reg(regaddr);
                 temp[0] = con.Reg((ushort)(regaddr+2));
                 float val = _2words2float(temp);
-                string Format = tbFormat.Text;
-                string strval;
-                try
-                {
-                    strval = val.ToString(Format);
-                }
-                catch(Exception e)
-                {
-                    strval = val.ToString("F6");
-                }
-                PrintTerminal(String.Format("%MW{0} = {1}", regaddr.ToString(),strval));
-                dataGridView2.Rows.Add(regaddr.ToString(), strval);
+                FloatList.Add(val);                
             }
+
+            // если есть изменения в показаниях
+            if (!FloatList.SequenceEqual<float>(OldFloatList))
+            {
+                ushort regaddr = ushort.Parse(this.tbRealAddr1.Text);
+                dataGridView2.Rows.Clear();
+                foreach (float val in FloatList)
+                {
+                    string Format = tbFormat.Text;
+                    string strval;
+                    try
+                    {
+                        strval = val.ToString(Format);
+                    }
+                    catch (Exception e)
+                    {
+                        strval = val.ToString("F6");
+                    }
+                    PrintTerminal(String.Format("%MW{0} = {1}", regaddr.ToString(), strval));
+                    dataGridView2.Rows.Add(regaddr.ToString(), strval);
+                    regaddr += 4;
+                }
+            }
+
+            OldFloatList = FloatList;
         }
 
         private void chbDINTTimer_CheckedChanged(object sender, EventArgs e)
@@ -164,10 +199,15 @@ namespace ModbusTest
             MessageBox.Show("Ошибка " + ErrStr);
             PrintTerminal("Ошибка " + ErrStr);
         }
-        
+
+        private List<ushort> OldUshortList;    // Старый список Ushort-ов
+        private List<ushort> UshortList;    // Список Ushort-ов
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (OldUshortList == null) OldUshortList = new List<ushort>();
+            UshortList = new List<ushort>();
             WatchDINTValues();
+            OldUshortList = UshortList;
         }
 
         private void DINTTimerStep_TextChanged(object sender, EventArgs e)

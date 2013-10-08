@@ -83,7 +83,7 @@
             // 
             this.statusStrip1.Location = new System.Drawing.Point(0, 273);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(344, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(390, 22);
             this.statusStrip1.TabIndex = 0;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -95,7 +95,7 @@
             this.оПрограммеToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(344, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(390, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -112,21 +112,21 @@
             // соединитьсяToolStripMenuItem
             // 
             this.соединитьсяToolStripMenuItem.Name = "соединитьсяToolStripMenuItem";
-            this.соединитьсяToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.соединитьсяToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.соединитьсяToolStripMenuItem.Text = "Соединиться";
             this.соединитьсяToolStripMenuItem.Click += new System.EventHandler(this.соединитьсяToolStripMenuItem_Click);
             // 
             // терминалToolStripMenuItem
             // 
             this.терминалToolStripMenuItem.Name = "терминалToolStripMenuItem";
-            this.терминалToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.терминалToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.терминалToolStripMenuItem.Text = "Терминал";
             this.терминалToolStripMenuItem.Click += new System.EventHandler(this.терминалToolStripMenuItem_Click);
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
@@ -168,7 +168,7 @@
             this.TabControl.Location = new System.Drawing.Point(0, 24);
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
-            this.TabControl.Size = new System.Drawing.Size(344, 249);
+            this.TabControl.Size = new System.Drawing.Size(390, 249);
             this.TabControl.TabIndex = 2;
             this.TabControl.Visible = false;
             // 
@@ -287,7 +287,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(370, 223);
+            this.tabPage2.Size = new System.Drawing.Size(382, 223);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "REAL";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -334,7 +334,7 @@
             this.panel2.Controls.Add(this.tbRealAddr1);
             this.panel2.Location = new System.Drawing.Point(3, 58);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(364, 25);
+            this.panel2.Size = new System.Drawing.Size(376, 25);
             this.panel2.TabIndex = 4;
             // 
             // label1
@@ -392,7 +392,7 @@
             this.Column4});
             this.dataGridView2.Location = new System.Drawing.Point(3, 86);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(367, 137);
+            this.dataGridView2.Size = new System.Drawing.Size(379, 137);
             this.dataGridView2.TabIndex = 0;
             // 
             // Column3
@@ -417,7 +417,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(344, 295);
+            this.ClientSize = new System.Drawing.Size(390, 295);
             this.Controls.Add(this.TabControl);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
